@@ -1,0 +1,72 @@
+{
+  "name": "meuapp",
+  "version": "1.0.0",
+  "description": "Aplicativo desktop com Electron, React e backend Express + Firebird",
+  "author": "Laerte Lima <seu-email@exemplo.com>",
+  "main": "main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "backend": "node ./backend/backend.js",
+    "backend:dev": "nodemon --watch backend --ext js,json --exec node ./backend/backend.js",
+    "backend:build": "del /f /q backend-dist\\backend.exe && pkg backend/backend.js --targets node18-win-x64 --out-path backend-dist",
+    "electron:start": "cross-env ELECTRON_START_URL=http://localhost:5173 electron .",
+    "start": "concurrently \"npm run backend:dev\" \"npm run dev\" \"npm run electron:start\"",
+    "package": "npm run backend:build && npm run build && electron-builder"
+  },
+  "build": {
+    "asar": false,
+    "appId": "com.suaempresa.meuapp",
+    "productName": "MeuApp",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "backend-dist/backend.exe",
+      "build/**/*",
+      "package.json",
+      ".env"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "closeAppBeforeInstall": true
+    }
+  },
+  "pkg": {
+    "assets": [
+      "backend/**/*"
+    ],
+    "targets": [
+      "node18-win-x64"
+    ],
+    "outputPath": "backend-dist"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.6.0",
+    "concurrently": "^7.6.0",
+    "cross-env": "^7.0.3",
+    "electron": "^26.0.0",
+    "electron-builder": "^23.6.0",
+    "nodemon": "^3.1.10",
+    "pkg": "^5.8.1",
+    "vite": "^7.0.0"
+  },
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.2.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "moment": "^2.30.1",
+    "node-firebird": "^1.1.9",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "recharts": "^3.0.1",
+    "tailwind-merge": "^3.3.1",
+    "wait-on": "^8.0.3"
+  }
+}
