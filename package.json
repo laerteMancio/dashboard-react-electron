@@ -32,7 +32,7 @@
       "target": "nsis"
     },
     "nsis": {
-      "closeAppBeforeInstall": true
+     
     }
   },
   "pkg": {

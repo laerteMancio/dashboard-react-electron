@@ -35,7 +35,6 @@ body {
   gap: 1rem;
 }
 
-
 /* ======== DESKTOP (lado a lado) ======== */
 @media (min-width: 769px) {
   .container-estatisticas {
@@ -188,4 +187,131 @@ body {
 .grafico-layout {
   width: 100%;
   height: 350px;
+}
+
+/* === CLASSES AJUSTADAS PARA TANQUES (padronizadas com estatísticas) === */
+
+.container-tanques {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 2rem auto 0 auto;
+  width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.container-tanques .header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.container-tanques .header h1 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.container-tanques .header p {
+  font-size: 0.95rem;
+  color: #666;
+}
+
+.container-tanques .input-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.date-input-tanques {
+  padding: 8px 12px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  
+  
+}
+
+.container-tanques .input-section:last-of-type {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  justify-content: center;
+}
+
+.card-tanques {
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.card-tanques:hover {
+  transform: scale(1.01);
+}
+
+.card-tanques .card-header {
+  margin-bottom: 0.5rem;
+}
+
+.card-tanques .card-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #555;
+}
+
+.card-tanques .card-content .stat-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.input-section.tanques-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  justify-content: center;
+  min-height: 220px; /* mantém a estrutura mesmo sem dados */
+}
+
+.card-tanques {
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  opacity: 1;
+}
+
+.card-tanques:hover {
+  transform: scale(1.01);
+}
+
+.card-tanques .card-header {
+  margin-bottom: 0.5rem;
+}
+
+.card-tanques .card-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #555;
+}
+
+.card-tanques .card-content .stat-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.info-message {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #888;
+  grid-column: 1 / -1;
 }

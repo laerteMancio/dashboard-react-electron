@@ -66,7 +66,13 @@ export default function App() {
   const totalDespesas = dadosAgrupados.reduce((acc, curr) => acc + (curr.valor || 0), 0)
   const mediaDespesas = dadosAgrupados.length > 0 ? totalDespesas / dadosAgrupados.length : 0
   const maiorDespesa = dadosAgrupados.length > 0 ? Math.max(...dadosAgrupados.map(item => item.valor || 0)) : 0
-  const menorDespesa = dadosAgrupados.length > 0 ? Math.min(...dadosAgrupados.map(item => item.valor || 0)) : 0
+
+  const valoresValidos = dadosAgrupados
+    .map(item => item.valor)
+    .filter(valor => typeof valor === 'number' && valor > 0);
+
+  const menorDespesa = valoresValidos.length > 0 ? Math.min(...valoresValidos) : 0;
+
 
   // Dados formatados para o gráfico
   const dadosGrafico = dadosAgrupados.map(item => ({
@@ -305,7 +311,7 @@ export default function App() {
             <div className='grafico-layout' style={{ height: '350px' }}>
               <ResponsiveContainer width="100%" height="100%">
                 {tipoGrafico === 'linha' ? (
-                  <LineChart data={dadosGrafico} margin={{ top: 5, right: 30, left: 20,  }}>
+                  <LineChart data={dadosGrafico} margin={{ top: 5, right: 30, left: 20, }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#ccc" />
                     <XAxis
                       dataKey="dataFormatada"
@@ -375,8 +381,45 @@ export default function App() {
         </div>
       </div>
 
-    
+      <div className="container-tanques">
+        <div className="header">
+          <h1>Dados Tanques</h1>
+          <p>Visualização dos tanques por dia</p>
+        </div>
+
+        <div className="input-section">
+          <input
+            type="date"
+            value={data}
+            onChange={(e) => setData(e.target.value)}
+            className="date-input-tanques"
+          />
+        </div>
+
+        {erroQtd && <p className="error-message">{erroQtd}</p>}
+
+        <div className="input-section tanques-grid">
+          {totalQtd?.length > 0 ? (
+            totalQtd.map((item, index) => (
+              <div key={index} className="card-tanques">
+                <div className="card-header">
+                  <h3 className="card-title">Tanque {item.tanque ?? item.TANQUE}</h3>
+                </div>
+                <div className="card-content">
+                  <div className="stat-value">{(item.quantidade ?? item.QUANTIDADE)} L</div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p className="info-message">Nenhum dado carregado</p>
+          )}
+        </div>
+      </div>
+
+
+
     </div>
+
   )
 }
 
