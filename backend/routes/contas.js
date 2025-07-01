@@ -16,10 +16,10 @@ const firebirdOptions = {
 
 // Quantidade por data
 router.get('/dia', (req, res) => {
-   const { data } = req.query;
+   const { dataConta } = req.query;
 
-  if (!data) {
-    return res.status(400).json({ erro: "Data obrigatória" });
+  if (!dataConta) {
+    return res.status(400).json({ erro: "A data é obrigatória" });
   }
 
   Firebird.attach(firebirdOptions, (err, db) => {
@@ -28,9 +28,9 @@ router.get('/dia', (req, res) => {
       return res.status(500).json({ erro: "Erro de conexão com o banco de dados" });
     }
 
-    const sql = `SELECT cod_tanque as tanque, qtd_final as quantidade from manmvtan WHERE data = ? and cod_tanque <> 7 order by cod_tanque`;
+    const sql = `SELECT cod_titulo, valor, descricao  FROM MANCONTASAPAGAR where datavencimento = ?`;
 
-    db.query(sql, [data], (err, result) => {
+    db.query(sql, [dataConta], (err, result) => {
       db.detach();
       if (err) {
         console.error('Erro na consulta:', err);
