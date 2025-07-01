@@ -416,6 +416,52 @@ export default function App() {
         </div>
       </div>
 
+      {/* Contas a pagar */}
+      <div className="container-contas-a-pagar">
+        <div className="header">
+          <h1>Contas a pagar por vencimento</h1>
+          <p>Visualização por data de vencimento</p>
+        </div>
+
+        <div className="input-section">
+          <input
+            type="date"
+            value={dataConta}
+            onChange={(e) => setDataConta(e.target.value)}
+            className="date-input-contas"
+          />
+        </div>
+
+        {erroContas && <p className="error-message">{erroContas}</p>}
+
+        <div className="lista-contas-grid">
+          {contas?.length > 0 ? (
+            contas.map((conta, index) => (
+              <div className="card-conta">
+                <ul className="item-lista">
+                  <li>
+                    <span className="card-title">📅 Título:</span>
+                    <span className="card-description">{conta.COD_TITULO}</span>
+                  </li>
+                  <li>
+                    <span className="card-title">Valor:</span>
+                    <span className="card-description">R$ {parseFloat(conta.VALOR).toFixed(2)}</span>
+                  </li>
+                  <li>
+                    <span className="card-title">Descrição:</span>
+                    <span className="card-description">{conta.DESCRICAO}</span>
+                  </li>
+                </ul>
+              </div>
+
+            ))
+          ) : (
+            <p className="info-message">Nenhuma conta encontrada</p>
+          )}
+        </div>
+      </div>
+
+
 
 
     </div>
